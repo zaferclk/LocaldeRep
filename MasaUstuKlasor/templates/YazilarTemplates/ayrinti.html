@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title_blok_adi %} Ayrinti Sayfası - {{ block.super }} {% endblock %}
+
+{% block base_body_blok_adi %}
+
+        <h1>YazilarTemplates içindeki ayrinti.html HTML olan</h1>
+        <section>
+            
+                <!-- {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                -->
+                {% if TekBirYaziAnahtar.yuklenen_dosya  %}
+                        <img src="{{ TekBirYaziAnahtar.yuklenen_dosya.url }}" class="img-responsive" width="300" height="300"><br>
+                {% endif %}
+
+                {{ TekBirYaziAnahtar.id }} <br>
+                <i> Yazar : {{ TekBirYaziAnahtar.yazar_modelden.get_full_name }} </i> <br>
+                {{ TekBirYaziAnahtar.baslik }} <br>
+                {{ TekBirYaziAnahtar.metin | safe | linebreaks }} <br>
+                {{ TekBirYaziAnahtar.yayinlanma_tarihi | timesince }} önce <br>
+                {{ TekBirYaziAnahtar.slug_alani_modelden }} <br>
+
+                <br><br><hr>
+                <h2>Yorum Ekle : </h2>
+                {% include 'YazilarTemplates/yorum.html' %}
+                <br><br><hr>
+                <h4>Yapılan Yorumlar : </h4>
+                <hr>
+                {% for yorum in TekBirYaziAnahtar.Yorumlar.all %}
+
+                        <h4> {{ yorum.yorum_yapanin_adi }} - <small> {{ yorum.yorum_olusturulma_tarihi | timesince }} önce   </small></h4>
+                        <p> {{ yorum.yorum_metni | linebreaks }} </p>
+                        <hr>
+
+                {% endfor %}
+                
+        </section>
+
+{% endblock %}

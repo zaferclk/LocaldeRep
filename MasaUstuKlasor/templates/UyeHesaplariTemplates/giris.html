@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title_blok_adi %} Oluştur Sayfası - {{ block.super }} {% endblock %}
+
+
+
+{% block base_body_blok_adi %}
+
+        <h1>UyeHesaplari klasörü içindeki giris.html HTML olan</h1>
+        <h2> {{UyeIslemTurAnahtar}} - Formu</h2>
+
+        <hr>
+        
+        <div class="container-fluid" >
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+
+                    <form method="POST" class="boostrap3">
+                        {% csrf_token %}        
+                        {{ GirisFormuAnahtar|crispy }} <br>
+                        <input class="btn btn-primary" type="submit" value="{{UyeIslemTurAnahtar}}">
+                    </form>
+
+                </div>
+            </div>
+        </div>    
+
+       
+
+{% endblock %}

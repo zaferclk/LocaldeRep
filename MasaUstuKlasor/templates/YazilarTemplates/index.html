@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title_blok_adi %} index Sayfası - {{ block.super }} {% endblock %}
+
+{% block base_body_blok_adi %}
+
+        <br><hr><br>
+        <h1>YazilarTemplates içindeki index.html HTML olan</h1>
+        <br><hr>
+        <section>
+
+            {% for yazilarinHerBiri in TumYazilarAnahtar %}
+
+                {% if yazilarinHerBiri.yuklenen_dosya  %}
+                    <img src="{{ yazilarinHerBiri.yuklenen_dosya.url }}" class="img-responsive" width="300" height="300"><br>
+                {% endif %}
+
+                {{ yazilarinHerBiri.id }} <br>
+                <h4>Yazar : {{ yazilarinHerBiri.yazar_modelden.get_full_name }} </h4><br>
+                <!-- <a href="/DAppAdiYazilar/{{ yazilarinHerBiri.id }}" > {{ yazilarinHerBiri.baslik }} </a> <br> -->
+                <!-- <a href="{% url 'yazi_app_name:ayrinti_URLismi' id=yazilarinHerBiri.id %}" > {{ yazilarinHerBiri.baslik }} </a> <br> -->
+                <a href="{{ yazilarinHerBiri.get_absolute_url }}" > {{ yazilarinHerBiri.baslik }} </a> <br>
+                {{ yazilarinHerBiri.metin | safe | linebreaks }} <br>
+                {{ yazilarinHerBiri.yayinlanma_tarihi | timesince }} önce <br>
+                {{ yazilarinHerBiri.slug_alani_modelden }}  <br>
+
+                <br>
+                <hr>
+                <br>
+
+            {% endfor %}
+            
+            
+            <div class="pagination">
+                <span class="step-links">
+                    {% if TumYazilarAnahtar.has_previous %}
+                        <a href="?sayfa=1{% if request.GET.q %}&q={{ request.GET.q }} {% endif %}"> &laquo; ilk </a>
+                        <a href="?sayfa={{ TumYazilarAnahtar.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }} {% endif %}"> önceki </a>
+                    {% endif %}
+            
+                    <span class="current">
+                        {{ TumYazilarAnahtar.number }}.sayfa  / Toplam {{ TumYazilarAnahtar.paginator.num_pages }} sayfada
+                    </span>
+            
+                    {% if TumYazilarAnahtar.has_next %}
+                        <a href="?sayfa={{ TumYazilarAnahtar.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }} {% endif %}"> sonraki </a>
+                        <a href="?sayfa={{ TumYazilarAnahtar.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }} {% endif %}"> en son &raquo; </a>
+                    {% endif %}
+                </span>
+            </div>
+
+
+            <br><br>       
+
+        </section>
+
+{% endblock %}

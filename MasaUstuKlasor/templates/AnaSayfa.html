@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title_blok_adi %} Ana Sayfa - {{ block.super }} {% endblock %}
+
+{% block base_body_blok_adi %}
+
+        <h1>Ana Sayfa HTML olan</h1>
+        <p>Merhaba, {{isim}}</p>
+
+        <hr>
+
+        <div class="container-fluid">
+                <div class="row">
+                        <div class="col-md-8 col-sm-10 col-xs-2" style="background-color: red"> 1 .col-md-6 sütun</div>
+                        <div class="col-md-4 col-sm-2 col-xs-10" style="background-color: blue"> 2 .col-md-6 sütun</div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                        <div class="col-md-4" style="background-color: red"> 1 nci grup 4 sütun </div>
+                        <div class="col-md-8" style="background-color: blue">
+                                <div class="row">
+                                        <div class="col-md-2" style="background-color: pink"> 2 nci grubun ilki 2 sütun </div>
+                                        <div class="col-md-6" style="background-color: orange"> 2 nci grubun kincisi 6 sütun </div>
+                                        <div class="col-md-4" style="background-color:yellowgreen"> 2 nci grubun üçüncüsü 4 sütun </div>
+                                </div>
+                        </div>
+                </div>
+
+                <hr>
+
+        </div>
+
+        <br>
+        <br>
+        <hr>
+        <hr>
+        Hoşgeldin, {{ request.user.get_full_name }}
+        <br>
+        <br>
+        
+        
+{% endblock %}

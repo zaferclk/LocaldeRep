@@ -1,0 +1,18 @@
+{% load crispy_forms_tags %}
+
+
+        <h2>Yorum Formu</h2>
+        
+        <div class="container-fluid" >
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+
+                    <form method="POST" class="boostrap3">
+                        {% csrf_token %}        
+                        {{ YorumFormuAnahtar|crispy }} <br>                        
+                        <input class="btn btn-primary" type="submit" value="Yorum Ekle">
+                    </form>
+
+                </div>
+            </div>
+        </div>    

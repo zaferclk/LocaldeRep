@@ -1,0 +1,55 @@
+<!-- Navbar Start -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
+    <div class="container">
+
+        <div class="navbar-header">
+
+            <!-- Telefon ekranları için menü butonu -->
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- İsim Soyisim veya Marka İsmi -->
+            <a href="{% url 'ana_sayfa_URLismi' %}" class="navbar-brand">Django Dersleri</a>
+        </div>
+
+        <nav class="collapse navbar-collapse" role="navigation">
+
+            <!-- Arama Çubuğu -->
+            <form class="navbar-form navbar-left" role="search" method="GET" action="http://127.0.0.1:8000/DAppAdiYazilar/index/">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="q" placeholder="Yazılarda ara" value="{{ request.GET.q }}" >
+                    <span class="input-group-btn">
+                        <input class="btn btn-default" type="submit" value="Ara">
+                    </span>
+                </div>
+            </form>
+
+            <!-- Temel Sayfalar -->
+            <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'yazi_app_name:olustur_URLismi' %}">Yazı Ekle</a></li>
+                {% endif %}
+                <li><a href="{% url 'ana_sayfa_URLismi' %}">Anasayfa</a></li>
+                <li><a href="{% url 'yazi_app_name:index_URLismi' %}">Blog</a></li>
+                <li><a href="#">Hakkımda</a></li>
+                <li><a href="#">İletişim</a></li>
+
+                {% if not request.user.is_authenticated %}
+                    <li><a href="{% url 'uye_app_name:uye_kayit_URLismi' %}">Üye Ol</a></li>
+                    <li><a href="{% url 'uye_app_name:uye_giris_URLismi' %}">Giriş</a></li>
+
+                {% else %}
+                    <li><a href="{% url 'uye_app_name:uye_cikis_URLismi' %}">Çıkış</a></li>
+
+                {% endif %}
+
+            </ul>
+
+        </nav>
+
+    </div>
+</nav>
